@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
       const result = await authService.register(userData);
       
       if (result.success) {
-        // Không tự động đăng nhập sau khi đăng ký
+        
         return { 
           success: true, 
           message: 'Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.' 

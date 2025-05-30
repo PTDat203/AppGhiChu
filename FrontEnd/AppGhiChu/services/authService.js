@@ -5,15 +5,12 @@ export const authService = {
   // Đăng ký
   register: async (userData) => {
     try {
-      console.log('Register payload:', userData); // Log dữ liệu gửi lên
       const response = await api.post('/auth/register', userData);
       return {
         success: true,
         data: response.data,
-      };    } catch (error) {
-      console.log('Register error full:', error);
-      console.log('Register error response:', error.response);
-      console.log('Register error data:', error.response?.data);
+      };
+    } catch (error) {
       return {
         success: false,
         message: error.response?.data?.message || error.message || 'Đăng ký thất bại',

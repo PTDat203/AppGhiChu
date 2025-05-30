@@ -15,7 +15,6 @@ export const getTodayNotes = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error("Get today notes error:", error);
     res.status(500).json({
       success: false,
       message: "Lỗi khi lấy ghi chú hôm nay"
@@ -36,7 +35,6 @@ export const getAllNotes = async (req, res) => {
       data: { notes }
     });
   } catch (error) {
-    console.error("Get all notes error:", error);
     res.status(500).json({
       success: false,
       message: "Lỗi khi lấy danh sách ghi chú"
@@ -64,7 +62,6 @@ export const getNoteById = async (req, res) => {
       data: { note }
     });
   } catch (error) {
-    console.error("Get note by id error:", error);
     res.status(500).json({
       success: false,
       message: "Lỗi khi lấy chi tiết ghi chú"
@@ -93,7 +90,6 @@ export const createNote = async (req, res) => {
       data: { note }
     });
   } catch (error) {
-    console.error("Create note error:", error);
     res.status(400).json({
       success: false,
       message: error.message || "Lỗi khi tạo ghi chú"
@@ -124,7 +120,6 @@ export const updateNote = async (req, res) => {
       data: { note }
     });
   } catch (error) {
-    console.error("Update note error:", error);
     res.status(400).json({
       success: false,
       message: error.message || "Lỗi khi cập nhật ghi chú"
@@ -152,7 +147,6 @@ export const deleteNote = async (req, res) => {
       data: { note }
     });
   } catch (error) {
-    console.error("Delete note error:", error);
     res.status(500).json({
       success: false,
       message: "Lỗi khi xóa ghi chú"
@@ -184,7 +178,6 @@ export const toggleArchiveNote = async (req, res) => {
       data: { note }
     });
   } catch (error) {
-    console.error("Toggle archive note error:", error);
     res.status(500).json({
       success: false,
       message: "Lỗi khi thay đổi trạng thái lưu trữ"

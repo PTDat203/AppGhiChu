@@ -9,10 +9,6 @@ const BASE_URL = __DEV__
   ? `http://${DEV_IP}:3001/api`  // Development
   : 'http://your-production-url.com/api'; // Production// Production
 
-// Log để debug
-console.log('Current API URL:', BASE_URL);
-console.log('Platform:', Platform.OS);
-
 // Tạo instance axios
 const api = axios.create({
   baseURL: BASE_URL,  timeout: 10000,
@@ -29,9 +25,8 @@ api.interceptors.request.use(
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-      }
-    } catch (error) {
-      console.error('Error getting token:', error);
+      }    } catch (error) {
+      // Ignore token error
     }
     return config;
   },
@@ -40,26 +35,12 @@ api.interceptors.request.use(
   }
 );
 
-// Interceptor để xử lý response và log
+// Interceptor để xử lý response
 api.interceptors.response.use(
   (response) => {
-    console.log('✅ Response:', {
-      url: response.config.url,
-      method: response.config.method,
-      status: response.status,
-      data: response.data
-    });
     return response;
   },
   async (error) => {
-    console.log('❌ Error:', {
-      url: error.config?.url,
-      method: error.config?.method,
-      status: error.response?.status,
-      data: error.response?.data,
-      message: error.message,
-      code: error.code
-    });
 
     // Xử lý lỗi network
     if (error.code === 'ECONNABORTED') {

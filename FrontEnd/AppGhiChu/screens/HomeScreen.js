@@ -32,20 +32,15 @@ const HomeScreen = ({ navigation }) => {
       setIsLoading(true);
       const result = await noteService.getAllNotes();
       
-      console.log('Load notes response:', result);
-        if (result.success) {
-        // Lấy dữ liệu notes từ cấu trúc response
+      if (result.success) {
         const notesData = result.data?.data?.notes || [];
         const total = notesData.length || 0;
-        console.log('Notes data:', notesData);
-        console.log('Total notes:', total);
         setNotes(notesData);
         setTotalNotes(total);
       } else {
         Alert.alert('Lỗi', result.message);
       }
     } catch (error) {
-      console.error('Load notes error:', error);
       Alert.alert('Lỗi', 'Không thể tải danh sách ghi chú');
     } finally {
       setIsLoading(false);

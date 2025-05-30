@@ -63,13 +63,9 @@ export const login = async (req, res) => {
         .json({ message: "Thông tin đăng nhập chưa chính xác" });
     }
     
-    console.log("User found:", user.email);
-    console.log("Password from request:", password);
-    console.log("Hashed password in DB:", user.password);
     
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    console.log("Password validation result:", isPasswordValid);
-    
+   
     if (!isPasswordValid) {
       return res
         .status(400)
@@ -93,7 +89,7 @@ export const login = async (req, res) => {
       user: { id: user._id, email: user.email, username: user.username },
     });
   } catch (error) {
-    console.error("Login error:", error);
+
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -120,7 +116,7 @@ export const getProfile = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error("Get profile error:", error);
+    
     res.status(500).json({
       success: false,
       message: "Lỗi khi lấy thông tin profile"

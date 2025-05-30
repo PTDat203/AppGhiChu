@@ -33,11 +33,10 @@ const HomeScreen = ({ navigation }) => {
       const result = await noteService.getAllNotes();
       
       console.log('Load notes response:', result);
-      
-      if (result.success) {
-        // Đảm bảo lấy đúng cấu trúc dữ liệu từ API
+        if (result.success) {
+        // Lấy dữ liệu notes từ cấu trúc response
         const notesData = result.data?.data?.notes || [];
-        const total = result.data?.data?.pagination?.totalItems || 0;
+        const total = notesData.length || 0;
         console.log('Notes data:', notesData);
         console.log('Total notes:', total);
         setNotes(notesData);

@@ -153,34 +153,3 @@ export const deleteNote = async (req, res) => {
     });
   }
 };
-
-// Archive/Unarchive ghi chú
-export const toggleArchiveNote = async (req, res) => {
-  try {    const note = await Note.findOne({
-      _id: req.params.id,
-      author: req.user.id
-    });
-
-    if (!note) {
-      return res.status(404).json({
-        success: false,
-        message: "Không tìm thấy ghi chú"
-      });
-    }
-
-    note.isArchived = !note.isArchived;
-    await note.save();
-    await note.populate('author', 'username email');
-
-    res.json({
-      success: true,
-      message: note.isArchived ? "Lưu trữ ghi chú thành công" : "Bỏ lưu trữ ghi chú thành công",
-      data: { note }
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Lỗi khi thay đổi trạng thái lưu trữ"
-    });
-  }
-};
